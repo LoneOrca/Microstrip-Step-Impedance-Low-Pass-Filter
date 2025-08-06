@@ -1,0 +1,73 @@
+; Top Design: "Ideal TRL LPF p1_lib:M Strip TRLs V2 Tuned:schematic"
+; Netlisted using Hierarchy Policy: "Standard"
+
+Options ResourceUsage=yes UseNutmegFormat=no EnableOptim=no TopDesignName="Ideal TRL LPF p1_lib:M Strip TRLs V2 Tuned:schematic" DcopOutputNodeVoltages=yes DcopOutputPinCurrents=yes DcopOutputAllSweepPoints=no DcopOutputDcopType=0
+S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SPSS_WSP=yes \
+SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output" 
+
+SweepPlan: SP1_stim Start=0 GHz Stop=16.0 GHz Step=40.0 MHz 
+
+OutputPlan:SP1_Output \
+      Type="Output" \
+      UseEquationNestLevel=yes \
+      EquationNestLevel=2 \
+      UseSavedEquationNestLevel=yes \
+      SavedEquationNestLevel=2
+
+#load "python","LinearCollapse"
+Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2
+Port:Term2  N__19 0 Num=2 Z=50 Ohm Noise=yes 
+Port:Term1  N__6 0 Num=1 Z=50 Ohm Noise=yes 
+
+;#@# autodisplay="S_Params_Quad_dB_Smith"
+MLIN2:TL11  N__34 N__19 Subst="MSub1" W=W0 L=Lp Wall1=2.5e+28 mm Wall2=2.5e+28 mm Mod=1 
+MLIN2:TL14  N__24 N__25 Subst="MSub1" W=W0L L=L3*X_F Wall1=2.5e+28 mm Wall2=2.5e+28 mm Mod=1 
+MSTEP:Step5  N__27 N__28 Subst="MSub1" W1=W0H W2=W0L 
+MSTEP:Step4  N__25 N__26 Subst="MSub1" W1=W0L W2=W0H 
+MSTEP:Step3  N__23 N__24 Subst="MSub1" W1=W0H W2=W0L 
+MLIN2:TL18  N__30 N__31 Subst="MSub1" W=W0H L=L6*X_F Wall1=2.5e+28 mm Wall2=2.5e+28 mm Mod=1 
+MLIN2:TL17  N__26 N__27 Subst="MSub1" W=W0H L=L4*X_F Wall1=2.5e+28 mm Wall2=2.5e+28 mm Mod=1 
+MSTEP:Step2  N__21 N__22 Subst="MSub1" W1=W0L W2=W0H 
+MSTEP:Step1  N__16 N__9 Subst="MSub1" W1=W0 W2=W0L 
+
+fp=8.0000
+fp_TRL=8.0000
+Z0=50.0000
+Z0H=100.0000
+Z0L=25.0000
+
+theta_P=45.0000
+theta_1=25.3792
+theta_2=40.7287
+theta_3=52.4256
+theta_4=46.9023
+theta_5=52.4256
+theta_6=40.7287
+theta_7=25.3792
+model MSub1 MSUB H=0.635 mm Er=10.7 Mur=1 Cond=5.8e7 Hu=1e+33 mm T=18 um TanD=0.0027 Rough=0 mm DielectricLossModel=1 FreqForEpsrTanD=1.0 GHz LowFreqForTanD=1.0 kHz HighFreqForTanD=1.0 THz RoughnessModel=2 
+MLIN2:TL10  N__6 N__16 Subst="MSub1" W=W0 L=Lp Wall1=2.5e+28 mm Wall2=2.5e+28 mm Mod=1 
+
+W0=0.554162 mm
+W0L=1.874320 mm
+W0H=0.058710 mm
+Lp=1.745350 mm
+L1=0.910946 mm
+L2=1.719180 mm
+L3=1.881730 mm
+L4=1.979770 mm
+L5=L3
+L6=L2
+L7=L1
+MLIN2:TL12  N__9 N__21 Subst="MSub1" W=W0L L=L1*X_F Wall1=2.5e+28 mm Wall2=2.5e+28 mm Mod=1 
+MLIN2:TL13  N__22 N__23 Subst="MSub1" W=W0H L=L2*X_F Wall1=2.5e+28 mm Wall2=2.5e+28 mm Mod=1 
+MLIN2:TL15  N__28 N__29 Subst="MSub1" W=W0L L=L5*X_F Wall1=2.5e+28 mm Wall2=2.5e+28 mm Mod=1 
+MLIN2:TL16  N__32 N__33 Subst="MSub1" W=W0L L=L7*X_F Wall1=2.5e+28 mm Wall2=2.5e+28 mm Mod=1 
+MSTEP:Step6  N__29 N__30 Subst="MSub1" W1=W0L W2=W0H 
+MSTEP:Step7  N__31 N__32 Subst="MSub1" W1=W0H W2=W0L 
+MSTEP:Step8  N__33 N__34 Subst="MSub1" W1=W0L W2=W0 
+
+X_F1=0.917 tune{ 0.1 to 2 by 0.1 }
+
+X_F2=1.12
+
+X_F=X_F1/X_F2

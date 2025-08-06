@@ -1,0 +1,21 @@
+
+hpeesofsim (*) 595.shp Oct 31 2023, MINT version 5
+    (64-bit windows built: Tue Oct 31, 2023 22:23:19 +0000)
+
+
+***** Simulation started at Mon Mar 25 22:09:33 2024
+      Running on host: "LAPTOP-PGPK6ETP"
+      In Directory: "C:\Users\SIVA SRINIVAS\Desktop\ADS exercise 1\Project 1\Ideal TRL LPF p1_wrk\data"
+      Process ID: 18728
+
+
+SP SP1[1] <Ideal TRL LPF p1_lib:M Strip TRLs V2 Tuned:schematic>   freq=(0 Hz->16 GHz)
+Warning detected by hpeesofsim during SP analysis 'SP1'.
+    Value(31.925055) <= MinLegalValue(0.100000) OR Value >= MaxLegalValue(10.000000) for 'W2/W1' in `Step7'
+
+
+
+
+Resource usage:
+  Total stopwatch time     =     1.76 seconds.
+

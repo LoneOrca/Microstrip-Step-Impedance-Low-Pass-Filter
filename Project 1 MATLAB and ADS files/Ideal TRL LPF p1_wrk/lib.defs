@@ -1,0 +1,4 @@
+INCLUDE $HPEESOF_DIR/oalibs/analog_rf.defs
+INCLUDE $HPEESOF_DIR/oalibs/dsp.defs
+DEFINE Ideal#20TRL#20LPF#20p1_lib Ideal${__SPACE}TRL${__SPACE}LPF${__SPACE}p1_lib
+ASSIGN Ideal#20TRL#20LPF#20p1_lib libMode shared
