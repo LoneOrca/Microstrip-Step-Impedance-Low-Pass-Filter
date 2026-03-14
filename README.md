@@ -1,171 +1,53 @@
-# Microstrip Step-Impedance Low-Pass Filter
+# Stepped-Impedance Low-Pass Filter Design
 
-![License](https://img.shields.io/github/license/LoneOrca/Microstrip-Step-Impedance-Low-Pass-Filter)
-![Repo Size](https://img.shields.io/github/repo-size/LoneOrca/Microstrip-Step-Impedance-Low-Pass-Filter)
-![Last Commit](https://img.shields.io/github/last-commit/LoneOrca/Microstrip-Step-Impedance-Low-Pass-Filter)
-![Issues](https://img.shields.io/github/issues/LoneOrca/Microstrip-Step-Impedance-Low-Pass-Filter)
+This repository contains the design, simulation, and analysis of a 7th-order stepped-impedance low-pass filter (LPF). The project progresses from theoretical lumped-element design to a physical microstrip implementation using Rogers Duroid 6010 substrate.
 
-Design and analysis of a **Stepped-Impedance Microstrip Low-Pass Filter (LPF)** used in microwave and RF systems.
+## Project Overview
 
-This project demonstrates how lumped element filters can be implemented using **distributed microstrip transmission line sections** for high-frequency applications.
+The goal was to design an LPF that meets high-performance microwave specifications, suitable for applications requiring sharp cutoff frequencies and high stopband rejection.
 
----
+### Technical Specifications
 
-# Project Overview
+* **Filter Type:** 7th-Order Chebyshev Low-Pass Filter.
+* **Passband Edge ($f_p$):** 8 GHz.
+* **Stopband Edge ($f_s$):** 12 GHz.
+* **Return Loss ($RL$):** $\ge 22$ dB for $f \le 8$ GHz.
+* **Insertion Loss ($IL$):** $\le 0.2$ dB for $f \le 8$ GHz.
+* **Stopband Rejection:** $\ge 25$ dB for $f \ge 12$ GHz.
+* **System Impedance:** 50 $\Omega$.
 
-A **Stepped-Impedance Low-Pass Filter (SILPF)** is a distributed microwave filter built using alternating **high-impedance** and **low-impedance** microstrip transmission lines.
+## Project Structure
+**code**          → MATLAB scripts for design calculations. 
 
-These sections emulate the behavior of lumped elements:
+**ads**           → ADS simulation files and schematics.
 
-| Microstrip Section           | Equivalent Lumped Element |
-| ---------------------------- | ------------------------- |
-| High impedance (narrow line) | Inductor                  |
-| Low impedance (wide line)    | Capacitor                 |
+**output**        → Performance plots and S-parameter results.
 
-This technique is widely used in microwave circuits because lumped components become impractical at very high frequencies.
+**documentation** → Final project report and design specs.
 
----
 
-# Objectives
+## Design Workflow
 
-* Design a microstrip low-pass filter using the stepped-impedance technique
-* Convert lumped LC prototype values to distributed transmission line sections
-* Simulate the frequency response of the filter
-* Evaluate **S-parameters (S11 and S21)**
-* Analyze passband and stopband characteristics
+1. **Lumped-Element Design:** Calculated ideal $L$ and $C$ values for a 7th-order prototype.
 
----
+2. **Ideal Transmission Line Model:** Converted lumped elements into stepped-impedance lines with $Z_{0L} = 25\ \Omega$ and $Z_{0H} = 100\ \Omega$.
 
-# Theory
+3. **Microstrip Conversion:** Realized the design on a **Duroid 6010 substrate** ($\epsilon_r = 10.7$, thickness = 0.635 mm).
 
-Traditional low-pass filters are designed using lumped inductors and capacitors. However, at microwave frequencies, these components are replaced with transmission line sections.
+4. **Optimization & Tuning:** Refined the microstrip model by adding MSTEP elements and tuning line lengths to meet original specifications.
 
-### Key Design Steps
+## Tools Used
 
-1. Start with a **normalized low-pass prototype filter**
+* **MATLAB:** Used for initial mathematical modeling and ideal lumped-element simulations.
 
-2. Scale the prototype values for the desired **cutoff frequency**
+* **Advanced Design System (ADS):** Used for microstrip layout, S-parameter simulation, and optimization.
 
-3. Replace components with transmission line equivalents:
+## Results Summary
 
-   * Inductor → High impedance microstrip line
-   * Capacitor → Low impedance microstrip line
+* Successfully achieved a return loss better than 22 dB in the passband.
+* The final microstrip version (V3) maintained the 8 GHz cutoff while ensuring $>25$ dB rejection at 12 GHz.
 
-4. Convert electrical parameters into **physical dimensions**:
-
-   * Width (W)
-   * Length (L)
-
-The final design is a cascade of alternating impedance microstrip sections.
 
 ---
 
-# Repository Structure
-
-```
-Microstrip-Step-Impedance-Low-Pass-Filter
-│
-├── docs/                 # Design documentation
-├── simulation/           # Simulation files
-├── results/              # S-parameter plots and graphs
-├── images/               # Layout diagrams and figures
-└── README.md
-```
-
-*(Modify this section based on the files present in the repository.)*
-
----
-
-# Design Parameters
-
-| Parameter           | Value       |
-| ------------------- | ----------- |
-| Filter Type         | Butterworth |
-| System Impedance    | 50 Ω        |
-| Substrate           | FR4         |
-| Dielectric Constant | 4.4         |
-| Substrate Height    | 1.6 mm      |
-| Conductor Material  | Copper      |
-
----
-
-# Simulation Tools
-
-The design can be simulated using various RF and microwave tools:
-
-* MATLAB RF Toolbox
-* Keysight ADS
-* Ansys HFSS
-* CST Microwave Studio
-* QUCS
-
----
-
-# Results
-
-Typical simulation outputs include:
-
-* Return Loss (**S11**)
-* Insertion Loss (**S21**)
-* Frequency Response
-* Cutoff Frequency Characteristics
-
-Example expected behavior:
-
-* Low insertion loss in passband
-* Flat frequency response
-* High attenuation beyond cutoff frequency
-
----
-
-# Applications
-
-Stepped-impedance microstrip filters are commonly used in:
-
-* RF transmitters and receivers
-* Microwave communication systems
-* Radar electronics
-* Satellite communication hardware
-* Harmonic suppression networks
-
----
-
-# Future Improvements
-
-Possible extensions to this project:
-
-* Higher order filter design for sharper roll-off
-* Optimization using EM simulation
-* Fabrication and measurement of the physical filter
-* Integration into RF front-end systems
-
----
-
-# Contributing
-
-Contributions are welcome.
-
-If you'd like to improve the design, add simulations, or extend the project:
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Open a pull request
-
----
-
-# License
-
-This project is licensed under the **MIT License**.
-
----
-
-# References
-
-1. D. M. Pozar — *Microwave Engineering*
-2. RF and Microwave Filter Design textbooks
-3. Research papers on stepped-impedance filters
-
----
-
-⭐ If you found this project useful, consider **starring the repository**.
+Developed as part of the Microwave Engineering (EE 514/414) curriculum at Western New England University.
